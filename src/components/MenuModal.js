@@ -12,7 +12,7 @@ export default function MenuModal(props) {
 
     return (
         <div>
-            <MenuCard title={props.title} description={props.description} onClick={handleOpen} />
+            <MenuCard title={props.title} description={props.description} onClick={handleOpen} gif={props.gif} />
             <Modal
                 open={open}
                 onClose={handleClose}

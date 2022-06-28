@@ -1,6 +1,7 @@
 .main_container{
-  margin-top: 7% !important;
   align-content: center !important;
+  text-align: center !important;
+  padding-top: 10% !important;
 }
 
 .card_container{
@@ -11,7 +12,6 @@
 
 .sub_container{
   display: flex !important;
-  margin-top: 2% !important;
   align-content: center !important;
 }
 
@@ -37,4 +37,13 @@
 
 .swal2-container {
   z-index: 10000 !important;
+}
+
+.header_image{
+  width: 300px;
+}
+
+.main_body{
+  height: 100vh!important;
+  background-color: rgb(209, 212, 212) !important;
 }

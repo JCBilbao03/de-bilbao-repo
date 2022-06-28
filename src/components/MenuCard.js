@@ -8,7 +8,7 @@ export default function MenuCard(props) {
       <CardMedia
         component="img"
         height="240"
-        image="https://pbs.twimg.com/profile_images/1400001673532116997/8qEpv4Ca_400x400.jpg"
+        image={props.gif}
         alt="green iguana"
       />
       <CardContent>
