@@ -24,7 +24,7 @@ export default function MenuModal(props) {
                     <Container className='modal_form'>
                         {
                             props.action === "Create" ?
-                                <CreateModalContent handleClose={handleClose} action={props.action} />
+                                <CreateModalContent handleClose={handleClose} action={props.action} isEdit={false} />
                                 :
                                 <ModalTable handleClose={handleClose} action={props.action} />
                         }

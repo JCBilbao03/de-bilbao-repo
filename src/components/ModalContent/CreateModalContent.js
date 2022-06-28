@@ -1,7 +1,7 @@
 import { Button, FormControl, InputLabel, MenuItem, Select, Stack, TextField } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import Swal from 'sweetalert2';
-import { addMenu, getCategories, getSizes } from '../../firestore/firestoreQueries';
+import { addMenu, getCategories, getSizes, updateMenu } from '../../firestore/firestoreQueries';
 
 export default function CreateModalContent(props) {
     const [form, setForm] = useState({});
@@ -42,6 +42,10 @@ export default function CreateModalContent(props) {
       fecthSizes()
     }, []);
 
+    useEffect(() => {
+        setForm(props.data)
+    }, [props]);
+
     const handleChange = (e) => {
         let name = e.target.name;
         let value = name === "price" || name === "stock" ? Number(e.target.value) : e.target.value;
@@ -62,17 +66,30 @@ export default function CreateModalContent(props) {
         })
     }
 
+    const editMenu = async () => {
+        await updateMenu(form).then(()=>{
+            props.handleClose()
+            Swal.fire(
+                'Success!',
+                'You have updated a new item in your menu!',
+                'success'
+              )
+        })
+    }
+
+
+
     return (
-        <>
+        <div style={{display: props.isEdit && 'none'}}>
             <Stack spacing={2}>
-                <TextField  onChange={handleChange} name="name" label="Name" variant="outlined" />
-                <TextField  onChange={handleChange} name="description" label="Description" variant="outlined" />
+                <TextField value={form?.name} onChange={handleChange} name="name" label="Name" variant="outlined" />
+                <TextField value={form?.description} onChange={handleChange} name="description" label="Description" variant="outlined" />
                 <FormControl fullWidth>
                     <InputLabel >Category</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
                         name="category"
-                        value={form.category}
+                        value={form?.category}
                         label="Category"
                         onChange={handleChange}
                     >
@@ -91,7 +108,7 @@ export default function CreateModalContent(props) {
                     <Select
                         labelId="demo-simple-select-label"
                         name="size"
-                        value={form.size}
+                        value={form?.size}
                         label="Size"
                         onChange={handleChange}
                     >
@@ -104,14 +121,14 @@ export default function CreateModalContent(props) {
                         }
                     </Select>
                 </FormControl>
-                <TextField  onChange={handleChange} name="price" label="Price" variant="outlined" type="number" />
-                <TextField  onChange={handleChange} name="stock" label="Stock" variant="outlined" type="number" />
+                <TextField value={form?.price} onChange={handleChange} name="price" label="Price" variant="outlined" type="number" />
+                <TextField value={form?.stock} onChange={handleChange} name="stock" label="Stock" variant="outlined" type="number" />
             </Stack>
             <Stack direction="row" spacing={2} mt={10} justifyContent="flex-end">
                 <Button size="large" variant="outlined" onClick={props.handleClose} color="error">Cancel</Button>
-                <Button size="large" variant="outlined" onClick={saveMenu}>{props.action}</Button>
+                <Button size="large" variant="outlined" onClick={props.action === "Edit" ? editMenu : saveMenu}>{props.action}</Button>
             </Stack>
-        </>
+        </div>
 
     )
 }

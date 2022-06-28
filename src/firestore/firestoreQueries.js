@@ -41,5 +41,9 @@ export const deleteMenu = async (id) => {
     }
 }
 
+export const updateMenu = async (doc) => {
+    return await db.collection('Menu').doc(doc.id).set( doc , { merge: true });
+}
+
 
 

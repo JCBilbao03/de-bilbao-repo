@@ -4,16 +4,19 @@ import { deleteMenu, getMenu } from '../../firestore/firestoreQueries';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Swal from 'sweetalert2';
+import CreateModalContent from './CreateModalContent';
 export default function ModalTable(props) {
     const [menu, setMenu] = useState([]);
+    const [isEdit, setIsEdit] = useState(true);
+    const [selectedItem, setSelectedItem] = useState({});
 
     // call when fetching sizes data
     const onMenuUpdate = async (query) => {
         let menuArray = []
         query.forEach(docs => {
             menuArray.push({ id: docs.id, ...docs.data() })
-            setMenu(menuArray);
         });
+        setMenu(menuArray);
     }
 
     // get the categories data
@@ -29,15 +32,26 @@ export default function ModalTable(props) {
             confirmButtonText: 'Delete',
         }).then(async (result) => {
             if (result.isConfirmed) {
-                await deleteMenu(doc.id).then(() => {
-                    Swal.fire(
-                        'Success!',
-                        'You have deleted ' + doc.name + ' in your menu!',
-                        'success'
-                    )
+                await deleteMenu(doc.id).then(async () => {
+                    await getMenu(onMenuUpdate).then(() => {
+                        Swal.fire(
+                            'Success!',
+                            'You have deleted ' + doc.name + ' in your menu!',
+                            'success'
+                        )
+                    })
                 })
             }
         })
+    }
+    // call when editing an item in the menu
+    const handleEdit = (doc) => {
+         setIsEdit(false)
+         setSelectedItem(doc)
+    }
+
+    const handleBack = async () => {
+        setIsEdit(true)
     }
 
     //call when did mount or on update
@@ -56,7 +70,9 @@ export default function ModalTable(props) {
         props.action !== "View" && 'Action'
     ]
     return (
-        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+        <>
+        <CreateModalContent data={selectedItem} action={props.action} isEdit={isEdit} handleClose={handleBack}/>
+         <Paper sx={{ width: '100%', overflow: 'hidden', display: isEdit || 'none'}}>
             <TableContainer sx={{ maxHeight: 440 }}>
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
@@ -97,13 +113,16 @@ export default function ModalTable(props) {
                                         props.action !== "View" &&
                                         <TableCell>
                                             <Stack direction="row" spacing={2}>
-                                                {props.action === 'Delete' && <Button color="error" onClick={() => handleDelete(column)}>
-                                                    <DeleteIcon />
-                                                    Delete
-                                                </Button>}
+                                                {
+                                                    props.action === 'Delete' &&
+                                                    <Button color="error" onClick={() => handleDelete(column)}>
+                                                        <DeleteIcon />
+                                                        Delete
+                                                    </Button>
+                                                }
                                                 {
                                                     props.action === 'Edit' &&
-                                                    <Button color="success">
+                                                    <Button color="success" onClick={() => handleEdit(column)}>
                                                         <EditIcon />
                                                         Edit
                                                     </Button>
@@ -121,5 +140,10 @@ export default function ModalTable(props) {
                 </Table>
             </TableContainer>
         </Paper>
+        <Stack direction="row" spacing={2} mt={10} justifyContent="flex-end">
+                <Button size="large" variant="outlined" onClick={props.handleClose} color="error">Close</Button>
+          </Stack>
+        </>
+       
     )
 }
