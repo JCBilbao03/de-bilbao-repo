@@ -1,25 +1,25 @@
-.main_container{
+.main_container {
   align-content: center !important;
   text-align: center !important;
   padding-top: 10% !important;
 }
 
-.card_container{
+.card_container {
   max-width: 300px !important;
   width: 260px !important;
-  margin-right: 1vw!important;
+  margin-right: 1vw !important;
 }
 
-.sub_container{
+.sub_container {
   display: flex !important;
   align-content: center !important;
 }
 
-.header_name{
+.header_name {
   text-align: center !important;
 }
 
-.modal_container{
+.modal_container {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -27,11 +27,11 @@
   width: 80vw;
   height: 90vh;
   box-shadow: 24;
-  background-color:antiquewhite ;
+  background-color: antiquewhite;
   border-radius: 10px !important;
 }
 
-.modal_form{
+.modal_form {
   margin-top: 5% !important;
 }
 
@@ -39,20 +39,20 @@
   z-index: 10000 !important;
 }
 
-.header_image{
+.header_image {
   width: 300px;
 }
 
-.main_body{
-  height: 100vh!important;
-  background-color:blanchedalmond !important;
+.main_body {
+  height: 100vh !important;
+  background-color: blanchedalmond !important;
   background-image: linear-gradient(blanchedalmond, rgb(230, 185, 130));
 }
 
-.header_main{
+.header_main {
   position: absolute !important;
   margin-top: -3.5vh !important;
-  font-size:xx-large !important;
+  font-size: xx-large !important;
   font-weight: 800 !important;
   padding: 2vh !important;
   width: 91.5% !important;
