@@ -27,7 +27,7 @@
   width: 80vw;
   height: 90vh;
   box-shadow: 24;
-  background-color: white;
+  background-color:antiquewhite ;
   border-radius: 10px !important;
 }
 
@@ -45,5 +45,21 @@
 
 .main_body{
   height: 100vh!important;
-  background-color: rgb(209, 212, 212) !important;
+  background-color:blanchedalmond !important;
+  background-image: linear-gradient(blanchedalmond, rgb(230, 185, 130));
+}
+
+.header_main{
+  position: absolute !important;
+  margin-top: -3.5vh !important;
+  font-size:xx-large !important;
+  font-weight: 800 !important;
+  padding: 2vh !important;
+  width: 91.5% !important;
+  margin-bottom: 2vh !important;
+  margin-left: 3% !important;
+  text-align: center !important;
+  background-color: bisque !important;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 10px !important;
 }

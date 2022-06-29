@@ -1,4 +1,4 @@
-import { Box, Modal} from '@mui/material'
+import { Box, Card, Modal} from '@mui/material'
 import { Container } from '@mui/system';
 import React, { useState } from 'react'
 import MenuCard from './MenuCard';
@@ -19,8 +19,9 @@ export default function MenuModal(props) {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-
+                
                 <Box className='modal_container'>
+                    <Card className='header_main'>DE BILBAO</Card>
                     <Container className='modal_form'>
                         {
                             props.action === "Create" ?
