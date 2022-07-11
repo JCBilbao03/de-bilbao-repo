@@ -119,12 +119,12 @@ export default function CreateModalContent(props) {
           <Select
             labelId="demo-simple-select-label"
             name="category"
-            value={form?.category}
+            value={form?.category? form?.category : ""}
             label="Category"
             onChange={handleChange}
           >
-            {categories.map((cat) => {
-              return <MenuItem value={cat.category}>{cat.category}</MenuItem>;
+            {categories.map((item) => {
+              return <MenuItem value={item.category}>{item.category}</MenuItem>;
             })}
           </Select>
         </FormControl>
@@ -133,12 +133,12 @@ export default function CreateModalContent(props) {
           <Select
             labelId="demo-simple-select-label"
             name="size"
-            value={form?.size}
+            value={form?.size? form?.size : ""}
             label="Size"
             onChange={handleChange}
           >
-            {sizes.map((prod) => {
-              return <MenuItem value={prod.size}>{prod.size}</MenuItem>;
+            {sizes.map((item) => {
+              return <MenuItem value={item.size}>{item.size}</MenuItem>;
             })}
           </Select>
         </FormControl>

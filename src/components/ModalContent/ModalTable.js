@@ -14,7 +14,7 @@ import { deleteMenu, getMenu } from "../../firestore/firestoreQueries";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Swal from "sweetalert2";
-import CreateModalContent from "./CreateModalContent";
+import ModalContent from "./ModalContent";
 export default function ModalTable(props) {
   const [menu, setMenu] = useState([]);
   const [isEdit, setIsEdit] = useState(true);
@@ -83,7 +83,7 @@ export default function ModalTable(props) {
   
   return (
     <>
-      <CreateModalContent
+      <ModalContent
         data={selectedItem}
         action={props.action}
         isEdit={isEdit}

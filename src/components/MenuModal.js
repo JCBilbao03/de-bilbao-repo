@@ -2,7 +2,7 @@ import { Box, Card, Modal } from "@mui/material";
 import { Container } from "@mui/system";
 import React, { useState } from "react";
 import MenuCard from "./MenuCard";
-import CreateModalContent from "./ModalContent/CreateModalContent";
+import ModalContent from "./ModalContent/ModalContent";
 import ModalTable from "./ModalContent/ModalTable";
 
 export default function MenuModal(props) {
@@ -28,7 +28,7 @@ export default function MenuModal(props) {
           <Card className="header_main">DE BILBAO</Card>
           <Container className="modal_form">
             {props.action === "Create" ? (
-              <CreateModalContent
+              <ModalContent
                 handleClose={handleClose}
                 action={props.action}
                 isEdit={false}
